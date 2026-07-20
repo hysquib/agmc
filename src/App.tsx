@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout/Layout";
 import { HomePage } from "@/pages/HomePage";
-import { IntroductionPage } from "@/pages/IntroductionPage";
 import { RedemptionPage } from "@/pages/RedemptionPage";
 import { AwardsPage } from "@/pages/AwardsPage";
 import { PrizesPage } from "@/pages/PrizesPage";
@@ -16,7 +15,6 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/guide/introduction" element={<IntroductionPage />} />
           <Route path="/guide/redemption" element={<RedemptionPage />} />
           <Route path="/guide/awards" element={<AwardsPage />} />
           <Route path="/guide/prizes" element={<PrizesPage />} />

@@ -10,12 +10,6 @@ export interface SidebarGroup {
 
 export const sidebarData: SidebarGroup[] = [
   {
-    title: "快速开始",
-    items: [
-      { text: "什么是 AGMC", link: "/guide/introduction" },
-    ],
-  },
-  {
     title: "兑奖流程",
     items: [
       { text: "个人赛", link: "/guide/redemption" },
