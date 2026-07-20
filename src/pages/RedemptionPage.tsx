@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   FileCheck,
   CheckCircle2,
@@ -268,7 +268,7 @@ export function RedemptionPage() {
                 积分兑换奖品
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                如果你有积分并需要兑换奖品：发送完查询页面截图后，等待兑奖人员发送奖品兑换链接，填写对应的收件信息以及要兑换的奖品。
+                如果你有积分并需要兑换奖品：在第一步查询页面的结果中找到奖品兑换链接，填写对应的收件信息以及要兑换的奖品。
               </p>
               <Link
                 to="/guide/prizes"
