@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Gift, ArrowRight } from "lucide-react";
-import { awardsData } from "@/data/awards";
+import { prizeCatalog } from "@/data/awards";
 
 export function PrizesPage() {
   return (
@@ -14,64 +14,58 @@ export function PrizesPage() {
           奖品说明
         </h1>
         <p className="text-gray-600 dark:text-gray-300 text-lg">
-          各奖项对应的具体奖品明细和领取说明
+          使用积分兑换奖品，以下是积分兑换价目表
         </p>
       </div>
 
-      <div className="prose-custom mb-12">
-        <h2>奖品一览</h2>
-        <p>
-          AGMC 数学竞赛为各等级获奖者准备了丰富的奖品，以下是各奖项包含的具体内容：
+      <div className="card p-6 mb-8 bg-brand-50/50 dark:bg-brand-950/20 border-brand-200 dark:border-brand-800/50">
+        <p className="text-gray-700 dark:text-gray-300">
+          获得的积分可以用于兑换以下奖品。在兑奖流程中，向兑奖人员告知你想要的奖品及定制要求（如图片、尺寸等）。
         </p>
       </div>
 
-      <div className="space-y-6 mb-12">
-        {awardsData.map((award, index) => (
-          <div key={award.level} className="card p-6">
-            <div className="flex items-center gap-4 mb-4">
-              <span
-                className={`px-4 py-1.5 rounded-full text-sm font-bold bg-gradient-to-r ${award.color} text-white`}
-              >
-                {award.level}
-              </span>
-              <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                {award.name}
-              </span>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+        {prizeCatalog.map((prize, index) => (
+          <div
+            key={index}
+            className="card p-5 text-center animate-slide-up"
+            style={{ animationDelay: `${index * 0.05}s` }}
+          >
+            <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-950/50 flex items-center justify-center mx-auto mb-3">
+              <Gift className="w-6 h-6 text-brand-500" />
             </div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
-              {award.prizes.map((prize, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-2 px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg"
-                >
-                  <Gift className="w-4 h-4 text-brand-500 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {prize}
-                  </span>
-                </div>
-              ))}
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+              {prize.name}
+            </h3>
+            <div className="inline-flex items-center gap-1 px-3 py-1 bg-brand-50 dark:bg-brand-950/50 rounded-full">
+              <span className="text-sm font-medium text-brand-600 dark:text-brand-300">
+                {prize.points} 积分
+              </span>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="prose-custom">
-        <h2>奖品说明</h2>
-        <ul>
-          <li>所有奖品图片仅供参考，具体以实物为准</li>
-          <li>奖学金为税前金额，个人所得税由获奖者承担</li>
-          <li>夏令营等活动类奖品具体时间另行通知</li>
-          <li>如遇奖品缺货，组委会有权更换为同等价值的其他奖品</li>
-          <li>电子证书将发送至获奖选手注册时使用的邮箱</li>
+      <div className="card p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          奖品发放说明
+        </h2>
+        <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-2 flex-shrink-0" />
+            <span>兑奖人员会统计你想要的奖品和定制要求</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-2 flex-shrink-0" />
+            <span>奖品将邮寄至你所填写的地址</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-2 flex-shrink-0" />
+            <span>如未在报名时填写地址，可后续告知赛事组希望邮寄到的地址</span>
+          </li>
         </ul>
 
-        <h2>奖品发放</h2>
-        <p>
-          兑奖申请审核通过后，我们将在 7-15 个工作日内安排奖品发放。
-          你可以通过申请编号在官网查询奖品发放进度。
-        </p>
-
-        <div className="mt-8">
+        <div className="mt-6">
           <Link to="/guide/redemption" className="btn-primary">
             查看兑奖流程
             <ArrowRight className="w-4 h-4 ml-2" />

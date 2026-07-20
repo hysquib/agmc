@@ -17,8 +17,8 @@ export function HomePage() {
     },
     {
       icon: Trophy,
-      title: "奖项设置",
-      description: "查看各等级奖项详情",
+      title: "奖金说明",
+      description: "查看各赛道奖金详情",
       link: "/guide/awards",
     },
     {
@@ -46,7 +46,7 @@ export function HomePage() {
           <div className="animate-slide-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 dark:bg-brand-950/50 rounded-full text-brand-600 dark:text-brand-300 text-sm font-medium mb-8">
               <Trophy className="w-4 h-4" />
-              <span>2025 年度兑奖通道已开启</span>
+              <span>第六届 AGMC · 2026.7.30—8.4</span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
@@ -56,9 +56,9 @@ export function HomePage() {
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-              恭喜你在 AGMC 数学竞赛中取得优异成绩！
+              面向中学生的公益数学竞赛，三条赛道可同时报名
               <br className="hidden md:block" />
-              在这里，你可以快速了解兑奖流程，领取属于你的荣誉与奖励。
+              在这里了解兑奖流程，领取属于你的奖金与奖品。
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -67,7 +67,7 @@ export function HomePage() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link to="/guide/awards" className="btn-secondary text-base">
-                查看奖项
+                查看奖金
               </Link>
             </div>
           </div>
@@ -77,16 +77,16 @@ export function HomePage() {
           <div className="card p-8 md:p-12">
             <div className="grid grid-cols-3 gap-8 text-center">
               <div className="animate-slide-up" style={{ animationDelay: "0.1s" }}>
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">5</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">奖项等级</div>
+                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">¥18,500</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">总奖励价值</div>
               </div>
               <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">30天</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">兑奖有效期</div>
+                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">3</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">条赛道</div>
               </div>
               <div className="animate-slide-up" style={{ animationDelay: "0.3s" }}>
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">7-15</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">工作日发放</div>
+                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">第六届</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">赛事</div>
               </div>
             </div>
           </div>
