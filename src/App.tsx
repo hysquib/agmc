@@ -12,7 +12,7 @@ import { ContactPage } from "@/pages/ContactPage";
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/agmc">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
