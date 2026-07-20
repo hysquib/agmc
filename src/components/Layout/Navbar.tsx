@@ -1,28 +1,17 @@
-import { Sun, Moon, Menu, ChevronDown, Maximize2, Minimize2, PanelLeftClose, PanelRightClose, LayoutGrid } from "lucide-react";
+import { Sun, Moon, Menu, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
-import { useLayout, LayoutMode } from "@/hooks/useLayout";
 import { Logo } from "@/components/Logo";
 
 interface NavbarProps {
   onToggleSidebar: () => void;
 }
 
-const layoutModes: { mode: LayoutMode; icon: React.ElementType; label: string }[] = [
-  { mode: 'full', icon: PanelLeftClose, label: '全部展开' },
-  { mode: 'sidebar-only', icon: PanelRightClose, label: '侧边栏可调' },
-  { mode: 'both', icon: Maximize2, label: '两者可调' },
-  { mode: 'narrow', icon: LayoutGrid, label: '原始宽度' },
-];
-
 export function Navbar({ onToggleSidebar }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
-  const { mode, setMode } = useLayout();
   const location = useLocation();
   const [awardsOpen, setAwardsOpen] = useState(false);
-  const [layoutOpen, setLayoutOpen] = useState(false);
-  const layoutRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { text: "首页", link: "/" },
@@ -43,18 +32,6 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
   };
 
   const isAwardsActive = awardsDropdown.some(item => isActive(item.link));
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (layoutRef.current && !layoutRef.current.contains(e.target as Node)) {
-        setLayoutOpen(false);
-      }
-    };
-    if (layoutOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [layoutOpen]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 navbar-blur border-b border-gray-200/60 dark:border-gray-700/60">
@@ -133,101 +110,6 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
           >
             官网
           </a>
-
-          {/* Layout Panel */}
-          <div ref={layoutRef} className="relative">
-            <button
-              onClick={() => setLayoutOpen(!layoutOpen)}
-              className={`p-2 rounded-lg transition-all duration-150 ${
-                layoutOpen
-                  ? "bg-gray-100 dark:bg-gray-800"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-800"
-              }`}
-              aria-label="布局切换"
-            >
-              {layoutOpen ? (
-                <Minimize2 className="w-5 h-5 text-brand-500" />
-              ) : (
-                <Maximize2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-              )}
-            </button>
-
-            {layoutOpen && (
-              <div className="absolute top-full right-0 pt-2 w-80 animate-fade-in">
-                <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-5">
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
-                    布局切换
-                  </h3>
-
-                  {/* Layout mode buttons */}
-                  <div className="flex gap-2 mb-5">
-                    {layoutModes.map(({ mode: layoutMode, icon: Icon, label }) => (
-                      <button
-                        key={layoutMode}
-                        onClick={() => setMode(layoutMode)}
-                        className={`flex-1 flex flex-col items-center justify-center gap-1.5 p-3 rounded-lg transition-all duration-200 ${
-                          mode === layoutMode
-                            ? "bg-brand-500 text-white shadow-md"
-                            : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"
-                        }`}
-                        title={label}
-                      >
-                        <Icon className="w-4 h-4" />
-                        <span className="text-[10px] font-medium">{label.slice(0, 4)}</span>
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Page max width slider */}
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-medium text-gray-500 dark:text-gray-400">页面最大宽度</label>
-                    </div>
-                    <input
-                      type="range"
-                      min={50}
-                      max={100}
-                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-gray-200 dark:bg-gray-700"
-                    />
-                  </div>
-
-                  {/* Content max width slider */}
-                  <div className="mb-5">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-medium text-gray-500 dark:text-gray-400">内容最大宽度</label>
-                    </div>
-                    <input
-                      type="range"
-                      min={40}
-                      max={100}
-                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-gray-200 dark:bg-gray-700"
-                    />
-                  </div>
-
-                  {/* Spotlight toggle */}
-                  <div className="flex items-center justify-between py-2 border-t border-gray-100 dark:border-gray-800">
-                    <div>
-                      <div className="text-xs font-medium text-gray-700 dark:text-gray-300">聚光灯</div>
-                      <div className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">聚焦当前阅读区域</div>
-                    </div>
-                    <div className="flex gap-1">
-                      <button className="px-3 py-1.5 text-xs font-medium rounded-md bg-brand-500 text-white">ON</button>
-                      <button className="px-3 py-1.5 text-xs font-medium rounded-md bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400">OFF</button>
-                    </div>
-                  </div>
-
-                  {/* Spotlight style */}
-                  <div className="flex items-center justify-between mt-2 pt-2">
-                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400">聚光灯样式</div>
-                    <div className="flex gap-1">
-                      <button className="w-8 h-6 rounded bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"></button>
-                      <button className="w-8 h-6 rounded bg-brand-100 dark:bg-brand-950/50 border-2 border-brand-500"></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
 
           <button
             onClick={toggleTheme}
