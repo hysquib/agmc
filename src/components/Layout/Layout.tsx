@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
-import { useEffect } from "react";
 
 export function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -13,6 +12,31 @@ export function Layout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  // 卡片级聚光灯效果：全局鼠标跟踪
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      const rect = (card as HTMLElement).getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      (card as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
+      (card as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
+    });
+  }, []);
+
+  useEffect(() => {
+    let rafId: number;
+    const onMouseMove = (e: MouseEvent) => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => handleMouseMove(e));
+    };
+    document.addEventListener("mousemove", onMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, [handleMouseMove]);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
@@ -27,7 +51,7 @@ export function Layout() {
         className={`pt-16 min-h-screen transition-all duration-300
           ${!isHomePage ? "lg:pl-64" : ""}`}
       >
-        <div className="animate-fade-in">
+        <div className="page-max animate-fade-in">
           <Outlet />
         </div>
       </main>
@@ -41,10 +65,10 @@ export function Layout() {
           <p className="mt-2">
             如有疑问，请联系{" "}
             <a
-              href="mailto:support@agmc.example.com"
+              href="mailto:hysquib@iCloud.com"
               className="text-brand-500 hover:text-brand-600 transition-colors"
             >
-              support@agmc.example.com
+              hysquib@iCloud.com
             </a>
           </p>
         </div>
