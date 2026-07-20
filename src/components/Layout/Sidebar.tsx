@@ -49,7 +49,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                       to={item.link}
                       onClick={onClose}
                       className={`sidebar-link ${
-                        location.pathname === item.link ? "active" : ""
+                        location.pathname + location.search === item.link ? "active" : ""
                       }`}
                     >
                       {item.text}

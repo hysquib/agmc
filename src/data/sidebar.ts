@@ -12,8 +12,8 @@ export const sidebarData: SidebarGroup[] = [
   {
     title: "兑奖流程",
     items: [
-      { text: "个人赛", link: "/guide/redemption" },
-      { text: "团队赛", link: "/guide/redemption" },
+      { text: "个人赛", link: "/guide/redemption?tab=individual" },
+      { text: "团队赛", link: "/guide/redemption?tab=team" },
     ],
   },
   {

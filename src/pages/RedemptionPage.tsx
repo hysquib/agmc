@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   FileCheck,
   CheckCircle2,
@@ -27,7 +27,20 @@ interface PaymentMethod {
 }
 
 export function RedemptionPage() {
-  const [activeTab, setActiveTab] = useState<TabType>("individual");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState<TabType>(
+    tabFromUrl === "team" ? "team" : "individual"
+  );
+
+  useEffect(() => {
+    setActiveTab(tabFromUrl === "team" ? "team" : "individual");
+  }, [tabFromUrl]);
+
+  const handleTabChange = (tab: TabType) => {
+    setActiveTab(tab);
+    setSearchParams({ tab });
+  };
 
   const paymentMethods: PaymentMethod[] = [
     {
@@ -71,7 +84,7 @@ export function RedemptionPage() {
       {/* 标签页切换 */}
       <div className="flex gap-2 mb-8 border-b border-gray-200 dark:border-gray-700">
         <button
-          onClick={() => setActiveTab("individual")}
+          onClick={() => handleTabChange("individual")}
           className={`px-6 py-3 text-sm font-medium transition-colors duration-200 border-b-2 ${
             activeTab === "individual"
               ? "text-brand-600 dark:text-brand-400 border-brand-500"
@@ -81,7 +94,7 @@ export function RedemptionPage() {
           个人赛
         </button>
         <button
-          onClick={() => setActiveTab("team")}
+          onClick={() => handleTabChange("team")}
           className={`px-6 py-3 text-sm font-medium transition-colors duration-200 border-b-2 ${
             activeTab === "team"
               ? "text-brand-600 dark:text-brand-400 border-brand-500"
