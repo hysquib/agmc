@@ -61,7 +61,7 @@ export function Layout() {
           className={`max-w-6xl mx-auto px-4 py-8 text-center text-sm text-gray-500 dark:text-gray-400
             ${!isHomePage ? "lg:pl-64" : ""}`}
         >
-          <p>© 2025 AGMC 数学竞赛组委会. 保留所有权利.</p>
+          <p>© 2026 AGMC-兑换. 保留所有权利.</p>
           <p className="mt-2">
             如有疑问，请联系{" "}
             <a
