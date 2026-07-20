@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, HelpCircle, Search } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ChevronDown, HelpCircle, Search, ArrowRight } from "lucide-react";
 import { faqData } from "@/data/faq";
 
 export function FaqPage() {
@@ -84,13 +85,13 @@ export function FaqPage() {
         <p className="text-gray-500 dark:text-gray-400 mb-4">
           没有找到你的问题？
         </p>
-        <a
-          href="/about/contact"
+        <Link
+          to="/about/contact"
           className="inline-flex items-center text-brand-500 hover:text-brand-600 font-medium transition-colors"
         >
           联系我们获取帮助
-          <ChevronDown className="w-4 h-4 ml-1 -rotate-90" />
-        </a>
+          <ArrowRight className="w-4 h-4 ml-1" />
+        </Link>
       </div>
     </div>
   );
